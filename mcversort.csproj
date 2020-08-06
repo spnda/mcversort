@@ -3,6 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.1</Version>
+    <Authors>spnda</Authors>
+    <PackageProjectUrl>https://github.com/spnda/mcversort</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/spnda/mcversort</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
