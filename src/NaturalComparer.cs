@@ -1,35 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace mcversort {
-    public class NaturalComparer : IComparer<string> {
-        public int Compare(string x, string y) {
-            if (x == null && y == null) return 0;
-            if (x == null) return -1;
-            if (y == null) return 1;
+    public class NaturalComparer : Comparer<string> {
+        public override int Compare(string x, string y) {
+            if (x == y) return 0;
 
-            int lx = x.Length, ly = y.Length;
+            string[] x1, y1;
+            x1 = Regex.Split(x.Replace(" ", ""), "([0-9]+)");
+            y1 = Regex.Split(y.Replace(" ", ""), "([0-9]+)");
 
-            for (int mx = 0, my = 0; mx < lx && my < ly; mx++, my++) {
-                if (char.IsDigit(x[mx]) && char.IsDigit(y[my])) {
-                    long vx = 0, vy = 0;
+            for (int i = 0; i < x1.Length && i < y1.Length; i++)
+                if (x1[i] != y1[i]) {
+                    if (int.TryParse(x1[i], out int x2) && int.TryParse(y1[i], out int y2))
+                        return x2.CompareTo(y2);
 
-                    for (; mx < lx && char.IsDigit(x[mx]); mx++)
-                        vx = vx * 10 + x[mx] - '0';
-
-                    for (; my < ly && char.IsDigit(y[my]); my++)
-                        vy = vy * 10 + y[my] - '0';
-
-                    if (vx != vy)
-                        return vx > vy ? 1 : -1;
+                    return x1[i].CompareTo(y1[i]);
                 }
 
-                if (mx < lx && my < ly && x[mx] != y[my])
-                    return x[mx] > y[my] ? 1 : -1;
-            }
-
-            return lx - ly;
+            if (y1.Length > x1.Length) return 1;
+            else if (x1.Length > y1.Length) return -1;
+            else return 0;
         }
     }
 }
