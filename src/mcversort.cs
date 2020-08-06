@@ -28,6 +28,10 @@ namespace mcversort {
                     Assembly assembly = Assembly.GetExecutingAssembly();
                     FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
                     Console.WriteLine("mcversort - " + fileVersionInfo.ProductVersion);
+                    Console.WriteLine("-h\n    Shows this help message.\n");
+                    Console.WriteLine("-v\n    Verbose output.\n");
+                    Console.WriteLine("-p <path>\n    Specify a custom path to your minecraft version folder. On Windows, this is usually %AppData%\\.minecraft\\versions.\n");
+                    return;
                 }
             }
 
