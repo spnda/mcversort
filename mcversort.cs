@@ -81,6 +81,8 @@ namespace mcversort {
             if (version?.Id == null) return VersionType.VANILLA;
             if (version.Id.Contains("OptiFine")) return VersionType.OPTIFINE;
             else if (version.Id.Contains("forge")) return VersionType.FORGE;
+            else if (version.Id.Contains("fabric-loader")) return VersionType.FABRIC;
+            else if (version.Id.Contains("LabyMod")) return VersionType.LABYMOD;
             else return VersionType.VANILLA;
         }
 
