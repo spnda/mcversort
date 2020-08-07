@@ -4,7 +4,7 @@ using System.IO;
 
 namespace mcversort {
     class mcversort {
-        static readonly string version = "0.1.1";
+        static readonly string version = "0.2";
 
         static bool checks = false;
         static bool verbose = false;
@@ -13,6 +13,7 @@ namespace mcversort {
             string customPath = null;
             for (int i = 0; i < args.Length; i++) {
                 if (args[i] == "-p") {
+                    args[i + 1] = args[i + 1].Replace("\"", ""); // Some " get put into the string, remove them.
                     if (args[i + 1] != null && Directory.Exists(args[i + 1])) {
                         customPath = args[i + 1];
                     } else {
@@ -34,9 +35,9 @@ namespace mcversort {
             string[] versions = Directory.GetDirectories(customPath ?? Util.GetVersionPath());
             Array.Sort(versions, new NaturalComparer());
             if (versions.Length == 0) {
-                Console.WriteLine("Warning: No versions found.");
-                return;
+                Console.WriteLine("Error: No versions found.");
             }
+            int iv = 0, ip = 0;
             foreach (string version in versions) {
                 string jsonLocation = $"{version}/{Path.GetFileName(version)}.json";
                 if (!File.Exists(jsonLocation)) continue;
@@ -51,17 +52,22 @@ namespace mcversort {
                         minecraftVersion.InheritingVersion = JsonConvert.DeserializeObject<MinecraftVersion>(File.ReadAllText(inheritingJsonLocation));
                     }
                     if (minecraftVersion.InheritingVersion == null) continue;
-                    Console.WriteLine(minecraftVersion.Id);
+                    if (verbose) Console.WriteLine(minecraftVersion.Id);
                     // Because these third party minecraft versions sometimes use seemingly random release times in their JSON we will need to assign new ones.
                     // We also want future proofing for new versions to come
                     // We will get the position in the filesystem alphabetically and then calculate an appropiate offset.
                     minecraftVersion.ReleaseTime = minecraftVersion.Time = minecraftVersion.InheritingVersion.ReleaseTime.AddMinutes(GetOffsetByPositionInDirectory(versions, minecraftVersion.Id, minecraftVersion.InheritingVersion.Id));
                     File.WriteAllText(jsonLocation, ApplyChangesToJson(minecraftVersion, jsonString));
+                    iv++;
                 } catch (Exception e) {
-                    Console.WriteLine("An error occured. Skipping file.");
+                    Console.WriteLine("An error occured. Skipping version.");
                     if (verbose) Console.WriteLine(e.ToString());
+                    ip++;
                 }
             }
+            // Give some insight on what has just been done.
+            Console.WriteLine($"========\nVersions sorted: {iv}\nProblems encountered: {ip}\nRestart your Minecraft Launcher to see the changes.\n========\n\nPress any key to continue.");
+            Console.ReadLine(); // To keep the console open until the user presses any key.
         }
 
         private static int GetOffsetByPositionInDirectory(string[] versions, string version, string inheritingVersion) {
