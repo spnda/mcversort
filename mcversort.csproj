@@ -1,17 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <Version>0.2</Version>
     <Authors>spnda</Authors>
     <PackageProjectUrl>https://github.com/spnda/mcversort</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spnda/mcversort</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PublishTrimmed>true</PublishTrimmed>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <StartupObject>mcversort.mcversort</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +19,11 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
 </Project>

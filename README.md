@@ -6,7 +6,7 @@
 
 ## 👌 Sounds cool! How do I use it?
 
-You can easily download the Windows binaries and soon macOS and Linux from the [GitHub release page](https://github.com/spnda/mcversort/releases).
+You can easily download the Windows binaries from the [GitHub release page](https://github.com/spnda/mcversort/releases).
 
 From anywhere you can just double-click on the executable to run it. To see if you encountered any issues and see what's being done open the program from the command line.
 
