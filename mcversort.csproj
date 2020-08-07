@@ -8,6 +8,10 @@
     <PackageProjectUrl>https://github.com/spnda/mcversort</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spnda/mcversort</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>

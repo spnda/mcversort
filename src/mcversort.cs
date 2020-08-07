@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 
 namespace mcversort {
     class mcversort {
+        static readonly string version = "0.1.1";
+
         static bool checks = false;
         static bool verbose = false;
 
@@ -25,9 +23,7 @@ namespace mcversort {
                 } else if (args[i] == "-v") {
                     verbose = true;
                 } else if (args[i] == "-h") {
-                    Assembly assembly = Assembly.GetExecutingAssembly();
-                    FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-                    Console.WriteLine("mcversort - " + fileVersionInfo.ProductVersion);
+                    Console.WriteLine("mcversort - " + version);
                     Console.WriteLine("-h\n    Shows this help message.");
                     Console.WriteLine("-v\n    Verbose output.");
                     Console.WriteLine("-p <path>\n    Specify a custom path to your minecraft version folder. On Windows, this is usually %AppData%\\.minecraft\\versions.");

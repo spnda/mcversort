@@ -14,4 +14,4 @@ If you encounter any issues please open a [issue](https://github.com/spnda/mcver
 
 ## ▶️ Building
 
-To build you can simply clone this project and open it with Microsoft Visual Studio 2019. You should then be able to just build the project.
+To build you can simply clone this project and open it with Microsoft Visual Studio 2019. You should then be able to just build the project. To get a small executable you can run `dotnet publish -c release`.
